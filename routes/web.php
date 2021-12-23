@@ -24,3 +24,23 @@ Auth::routes(
 );
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/', function () {
+        return 'Halaman Admin';
+    });
+
+    Route::get('profile', function () {
+        return 'Halaman profil Admin';
+    });
+});
+
+Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:pengguna']], function () {
+    Route::get('/', function () {
+        return 'Halaman Pengguna';
+    });
+
+    Route::get('profile', function () {
+        return 'Halaman profil pengguna';
+    });
+});
