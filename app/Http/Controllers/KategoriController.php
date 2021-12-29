@@ -14,7 +14,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Kategori::all();
+        return view('kategori.index', compact('kategori'));
     }
 
     /**
@@ -24,7 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'nama' => 'required',
+        ]);
+
+        $kategori = new Kategori;
+        $kategori->nama = $request->nama;
+        $kategori->save();
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -44,9 +53,10 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function show(Kategori $kategori)
+    public function show($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        return view('kategori.show', compact('kategori'));
     }
 
     /**
@@ -55,9 +65,10 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kategori $kategori)
+    public function edit($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        return view('kategori.edit', compact('kategori'));
     }
 
     /**
@@ -67,9 +78,18 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'nama' => 'required',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+        $kategori->nama = $request->nama;
+        $kategori->save();
+        return redirect()->route('kategori.index');
+
     }
 
     /**
@@ -78,8 +98,11 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+        return redirect()->route('kategori.index');
+
     }
 }

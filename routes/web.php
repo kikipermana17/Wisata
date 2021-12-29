@@ -1,5 +1,6 @@
 <?php
 
+use App\http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,22 +46,33 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //     });
 // });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('buku', function () {
-        return view('buku.index');
-    });
+// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+//     Route::get('buku', function () {
+//         return view('buku.index');
+//     });
 
-    Route::get('pengarang', function () {
-        return view('pengarang.index');
-    });
+//     Route::get('pengarang', function () {
+//         return view('pengarang.index');
+//     });
+// });
+
+// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+//     Route::get('buku', function () {
+//         return view('buku.index');
+//     })->middleware(['role:admin']);
+
+//     Route::get('pengarang', function () {
+//         return view('pengarang.index');
+//     })->middleware(['role:admin']);
+// });
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('kategori', function () {
+        return view('kategori.index');
+    })->middleware(['role:admin']);
+    Route::resource('kategori', KategoriController::class);
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('buku', function () {
-        return view('buku.index');
-    })->middleware(['role:admin']);
-
-    Route::get('pengarang', function () {
-        return view('pengarang.index');
-    })->middleware(['role:admin']);
+Route::get('layouts', function () {
+    return view('layouts.admin');
 });

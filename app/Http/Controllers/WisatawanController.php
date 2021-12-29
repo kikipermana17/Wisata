@@ -14,7 +14,8 @@ class WisatawanController extends Controller
      */
     public function index()
     {
-        //
+        $wisatawan = Wisatawan::all();
+        return view('wisatawan.index', compact('wisatawan'));
     }
 
     /**
@@ -24,7 +25,7 @@ class WisatawanController extends Controller
      */
     public function create()
     {
-        //
+        return view('wisatawan.create');
     }
 
     /**
@@ -35,7 +36,22 @@ class WisatawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'nama' => 'required',
+            'jk' => 'required',
+            'telppon' => 'required',
+
+        ]);
+
+        $wisatawan = new Wisatawan;
+        $wisatawan->kategori_id = $request->kategori_id;
+        $wisatawan->nama = $request->nama;
+        $wisatawan->jk = $request->jk;
+        $wisatawan->telpon = $request->telpon;
+        $wisatawan->save();
+        return redirect()->route('wisatawan.index');
+
     }
 
     /**
@@ -44,9 +60,10 @@ class WisatawanController extends Controller
      * @param  \App\Models\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function show(Wisatawan $wisatawan)
+    public function show($id)
     {
-        //
+        $wisatawan = Wisatawan::findOrFail($id);
+        return view('$wisatawan.show', compact('$wisatawan'));
     }
 
     /**
@@ -55,9 +72,10 @@ class WisatawanController extends Controller
      * @param  \App\Models\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wisatawan $wisatawan)
+    public function edit($id)
     {
-        //
+        $wisatawan = Wisatawan::findOrFail($id);
+        return view('wisatawan.edit', compact('wisatawan'));
     }
 
     /**
@@ -67,9 +85,24 @@ class WisatawanController extends Controller
      * @param  \App\Models\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wisatawan $wisatawan)
+    public function update(Request $request, $id)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'nama' => 'required',
+            'jk' => 'required',
+            'telppon' => 'required',
+
+        ]);
+
+        $wisatawan = Wisatawan::findOrFail($id);
+        $wisatawan->kategori_id = $request->kategori_id;
+        $wisatawan->nama = $request->nama;
+        $wisatawan->jk = $request->jk;
+        $wisatawan->telpon = $request->telpon;
+        $wisatawan->save();
+        return redirect()->route('wisatawan.index');
+
     }
 
     /**
@@ -78,8 +111,11 @@ class WisatawanController extends Controller
      * @param  \App\Models\Wisatawan  $wisatawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wisatawan $wisatawan)
+    public function destroy($id)
     {
-        //
+        $wisatawan = Wisatawan::findOrFail($id);
+        $wisatawan->delete();
+        return redirect()->route('wisatawan.index');
+
     }
 }

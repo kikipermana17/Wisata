@@ -243,13 +243,23 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'buku',
-            'url' => 'admin/buku',
+            'text' => 'kategori',
+            'url' => 'admin/kategori',
             'icon' => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'pengarang',
-            'url' => 'admin/pengarang',
+            'text' => 'wisata',
+            'url' => 'admin/wisata',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'wisatawan',
+            'url' => 'admin/wisatawan',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'biro',
+            'url' => 'admin/biro',
             'icon' => 'far fa-fw fa-file',
         ],
         [

@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Wisatawan extends Model
 {
     use HasFactory;
+
+    protected $visible = ['nama', 'jk', 'telpon'];
+
+    protected $fillable = ['nama', 'jk', 'telpon'];
+
+    public $timestamps = true;
+
+    public function Biros()
+    {
+        return $this->hasMany('App\Models\Biro', 'biro_id');
+    }
 }
