@@ -58,21 +58,43 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Show Data wisatawan
+                                    <h1>Edit Data Wisata</h1>
                                 </div>
-                                <form Action="" method="post">
+                                <br>
+                                <form Action="{{ route('wisata.update', $wisata->id) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <div class="panel-body">
-                                        <label>Nama</label>
-                                        <input type="text" class="form-control" name="nama"
-                                            value="{{ $wisatawan->nama }}" disabled>
-                                        <label>Jenis Kelamin</label>
-                                        <input type="text" class="form-control" name="jk"
-                                            value="{{ $wisatawan->jk }}" disabled>
-                                        <label>Telpon</label>
-                                        <input type="text" class="form-control" name="telpon"
-                                            value="{{ $wisatawan->telpon }}" disabled>
+                                        <label>Kategori Id</label>
+                                        <select name="kategori_id" class="form-control">
+                                            @foreach ($kategori as $data)
+                                                <option value="{{ $data->id }}"
+                                                    {{ $data->id == $wisata->kategori_id ? 'selected="selected"' : '' }}>
+                                                    {{ $data->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label>Nama Wisata </label>
+                                        <input type="text" class="form-control" name="nama_wisata"
+                                            value="{{ $wisata->nama }}">
+                                        <label>Alamat</label>
+                                        <input type="text" class="form-control" name="alamat"
+                                            value="{{ $wisata->alamat }}">
+                                        <label>Deskripsi</label>
+                                        <input type="text" class="form-control" name="deskripsi"
+                                            value="{{ $wisata->deskripsi }}">
+                                        <label>Fasilitas</label>
+                                        <input type="text" class="form-control" name="fasilitas"
+                                            value="{{ $wisata->fasilitas }}">
+                                        <label>Deskripsi</label>
+                                        <input type="text" class="form-control" name="deskripsi"
+                                            value="{{ $wisata->deskripsi }}">
+                                        <label>Deskripsi</label>
+                                        <input type="text" class="form-control" name="deskripsi"
+                                            value="{{ $wisata->deskripsi }}">
+                                    </div>
+                                    <div class="panel-body">
+                                        <button type="reset" class="btn btn-warning">Reset</button>
+                                        <button type="submit" class="btn btn-primary">Ubah</button>
                                     </div>
                                 </form>
                             </div>

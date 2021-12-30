@@ -40,12 +40,11 @@ class WisatawanController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'jk' => 'required',
-            'telppon' => 'required',
+            'telpon' => 'required',
 
         ]);
 
         $wisatawan = new Wisatawan;
-        $wisatawan->kategori_id = $request->kategori_id;
         $wisatawan->nama = $request->nama;
         $wisatawan->jk = $request->jk;
         $wisatawan->telpon = $request->telpon;
@@ -63,7 +62,7 @@ class WisatawanController extends Controller
     public function show($id)
     {
         $wisatawan = Wisatawan::findOrFail($id);
-        return view('$wisatawan.show', compact('$wisatawan'));
+        return view('wisatawan.show', compact('wisatawan'));
     }
 
     /**
@@ -91,12 +90,11 @@ class WisatawanController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'jk' => 'required',
-            'telppon' => 'required',
+            'telpon' => 'required',
 
         ]);
 
         $wisatawan = Wisatawan::findOrFail($id);
-        $wisatawan->kategori_id = $request->kategori_id;
         $wisatawan->nama = $request->nama;
         $wisatawan->jk = $request->jk;
         $wisatawan->telpon = $request->telpon;

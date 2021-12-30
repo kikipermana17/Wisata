@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biro;
+use App\Models\Wisatawan;
 use Illuminate\Http\Request;
 
 class BiroController extends Controller
@@ -14,7 +15,8 @@ class BiroController extends Controller
      */
     public function index()
     {
-        //
+        $biro = Biro::all();
+        return view('biro.index', compact('biro'));
     }
 
     /**
@@ -24,7 +26,8 @@ class BiroController extends Controller
      */
     public function create()
     {
-        //
+        $wisatawan = Wisatawan::all();
+        return view('biro.create', compact('wisatawan'));
     }
 
     /**
@@ -35,7 +38,21 @@ class BiroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'wisatawan_id' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telpon' => 'required',
+        ]);
+
+        $biro = new Biro;
+        $biro->wisatawan_id = $request->wisatawan_id;
+        $biro->nama = $request->nama;
+        $biro->alamat = $request->alamat;
+        $biro->telpon = $request->telpon;
+        $biro->save();
+        return redirect()->route('biro.index');
     }
 
     /**
@@ -44,9 +61,10 @@ class BiroController extends Controller
      * @param  \App\Models\Biro  $biro
      * @return \Illuminate\Http\Response
      */
-    public function show(Biro $biro)
+    public function show($id)
     {
-        //
+        $biro = Biro::findOrFail($id);
+        return view('biro.show', compact('biro'));
     }
 
     /**
@@ -55,9 +73,11 @@ class BiroController extends Controller
      * @param  \App\Models\Biro  $biro
      * @return \Illuminate\Http\Response
      */
-    public function edit(Biro $biro)
+    public function edit($id)
     {
-        //
+        $wisatawan = Wisatawan::all();
+        $biro = Biro::findOrFail($id);
+        return view('biro.edit', compact('biro', 'wisatawan'));
     }
 
     /**
@@ -67,9 +87,23 @@ class BiroController extends Controller
      * @param  \App\Models\Biro  $biro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Biro $biro)
+    public function update(Request $request, $id)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'wisatawan_id' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telpon' => 'required',
+        ]);
+
+        $biro = Biro::findOrFail($id);
+        $biro->wisatawan_id = $request->wisatawan_id;
+        $biro->nama = $request->nama;
+        $biro->alamat = $request->alamat;
+        $biro->telpon = $request->telpon;
+        $biro->save();
+        return redirect()->route('biro.index');
     }
 
     /**
@@ -78,8 +112,10 @@ class BiroController extends Controller
      * @param  \App\Models\Biro  $biro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Biro $biro)
+    public function destroy($id)
     {
-        //
+        $biro = Biro::findOrFail($id);
+        $biro->delete();
+        return redirect()->route('biro.index');
     }
 }

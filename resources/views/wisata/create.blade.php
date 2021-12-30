@@ -58,21 +58,38 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Show Data wisatawan
+                                    Tambah Data Biro
                                 </div>
-                                <form Action="" method="post">
+                                <form Action="{{ route('biro.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    @method('put')
                                     <div class="panel-body">
-                                        <label>Nama</label>
-                                        <input type="text" class="form-control" name="nama"
-                                            value="{{ $wisatawan->nama }}" disabled>
-                                        <label>Jenis Kelamin</label>
-                                        <input type="text" class="form-control" name="jk"
-                                            value="{{ $wisatawan->jk }}" disabled>
-                                        <label>Telpon</label>
-                                        <input type="text" class="form-control" name="telpon"
-                                            value="{{ $wisatawan->telpon }}" disabled>
+                                        <label>Kategori Id</label>
+                                        <select name="kategori_id" class="form-control">
+                                            @foreach ($kategori as $data)
+                                                <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label>Nama Wisata</label>
+                                        <input type="text" class="form-control" name="nama_wisata">
+                                        <label>Alamat</label>
+                                        <input type="text" class="form-control" name="alamat">
+                                        <label>Deskripsi</label>
+                                        <input type="text" class="form-control" name="deskripsi">
+                                        <label>Faslitas</label>
+                                        <input type="text" class="form-control" name="fasilitas">
+                                        <label>Biro Id</label>
+                                        <select name="biro_id" class="form-control">
+                                            @foreach ($biro as $data)
+                                                <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label>Cover</label>
+                                        <input type="file" class="form-control" name="cover">
+                                    </div>
+                                    <div class="panel-body">
+                                        <br>
+                                        <button type="reset" class="btn btn-warning">Reset</button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
                                     </div>
                                 </form>
                             </div>

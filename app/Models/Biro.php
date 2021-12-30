@@ -15,12 +15,12 @@ class Biro extends Model
 
     public $timestamps = true;
 
-    public function Wisatawans()
+    public function Wisatawan()
     {
         return $this->belongsTo('App\Models\Wisatawan', 'wisatawan_id');
     }
 
-    public function Wisatas()
+    public function Wisata()
     {
         return $this->hasMany('App\Models\Wisata', 'wisata_id');
     }

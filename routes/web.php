@@ -1,6 +1,9 @@
 <?php
 
+use App\http\Controllers\BiroController;
 use App\http\Controllers\KategoriController;
+use App\http\Controllers\WisataController;
+use App\http\Controllers\WisatawanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,14 +68,50 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //         return view('pengarang.index');
 //     })->middleware(['role:admin']);
 // });
+Route::get('layouts', function () {
+    return view('layouts.admin');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('kategori', function () {
         return view('kategori.index');
     })->middleware(['role:admin']);
     Route::resource('kategori', KategoriController::class);
+
+    Route::get('wisatawan', function () {
+        return view('wisatawan.index');
+    })->middleware(['role:admin']);
+    Route::resource('wisatawan', WisatawanController::class);
+
+    Route::get('biro', function () {
+        return view('biro.index');
+    })->middleware(['role:admin']);
+    Route::resource('biro', BiroController::class);
+
+    Route::get('wisata', function () {
+        return view('wisata.index');
+    })->middleware(['role:admin']);
+    Route::resource('wisata', WisataController::class);
+
 });
 
-Route::get('layouts', function () {
-    return view('layouts.admin');
-});
+// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+//     Route::get('wisatawan', function () {
+//         return view('wisatawan.index');
+//     })->middleware(['role:admin']);
+//     Route::resource('wisatawan', WisatawanController::class);
+// });
+
+// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+//     Route::get('biro', function () {
+//         return view('biro.index');
+//     })->middleware(['role:admin']);
+//     Route::resource('biro', BiroController::class);
+// });
+
+// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+//     Route::get('wisata', function () {
+//         return view('wisata.index');
+//     })->middleware(['role:admin']);
+//     Route::resource('wisata', WisataController::class);
+// });

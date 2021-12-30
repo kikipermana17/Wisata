@@ -58,21 +58,24 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Show Data wisatawan
+                                    Show Data Biro
                                 </div>
                                 <form Action="" method="post">
                                     @csrf
                                     @method('put')
                                     <div class="panel-body">
-                                        <label>Nama</label>
-                                        <input type="text" class="form-control" name="nama"
-                                            value="{{ $wisatawan->nama }}" disabled>
-                                        <label>Jenis Kelamin</label>
-                                        <input type="text" class="form-control" name="jk"
-                                            value="{{ $wisatawan->jk }}" disabled>
-                                        <label>Telpon</label>
+                                        <label>Wisatawan Id</label>
+                                        <input type="text" class="form-control" name="wisatawan_id"
+                                            value="{{ $biro->wisatawan_id }}" disabled>
+                                        <label>Nama Biro</label>
+                                        <input type="text" class="form-control" name="nama" value="{{ $biro->nama }}"
+                                            disabled>
+                                        <label>Alamat</label>
+                                        <input type="text" class="form-control" name="alamat"
+                                            value="{{ $biro->alamat }}" disabled>
+                                        <label>No Telpon</label>
                                         <input type="text" class="form-control" name="telpon"
-                                            value="{{ $wisatawan->telpon }}" disabled>
+                                            value="{{ $biro->telpon }}" disabled>
                                     </div>
                                 </form>
                             </div>

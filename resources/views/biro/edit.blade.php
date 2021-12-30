@@ -58,21 +58,34 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Show Data wisatawan
+                                    <h1>Edit Data Kategori</h1>
                                 </div>
-                                <form Action="" method="post">
+                                <br>
+                                <form Action="{{ route('biro.update', $biro->id) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <div class="panel-body">
-                                        <label>Nama</label>
+                                        <label>Wisatawan Id</label>
+                                        <select name="wisatawan_id" class="form-control">
+                                            @foreach ($wisatawan as $data)
+                                                <option value="{{ $data->id }}"
+                                                    {{ $data->id == $biro->wisatawan_id ? 'selected="selected"' : '' }}>
+                                                    {{ $data->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label>Nama </label>
                                         <input type="text" class="form-control" name="nama"
-                                            value="{{ $wisatawan->nama }}" disabled>
-                                        <label>Jenis Kelamin</label>
-                                        <input type="text" class="form-control" name="jk"
-                                            value="{{ $wisatawan->jk }}" disabled>
-                                        <label>Telpon</label>
+                                            value="{{ $biro->nama }}">
+                                        <label>Alamat</label>
+                                        <input type="text" class="form-control" name="alamat"
+                                            value="{{ $biro->alamat }}">
+                                        <label>No Telpon</label>
                                         <input type="text" class="form-control" name="telpon"
-                                            value="{{ $wisatawan->telpon }}" disabled>
+                                            value="{{ $biro->telpon }}">
+                                    </div>
+                                    <div class="panel-body">
+                                        <button type="reset" class="btn btn-warning">Reset</button>
+                                        <button type="submit" class="btn btn-primary">Ubah</button>
                                     </div>
                                 </form>
                             </div>

@@ -15,7 +15,7 @@ class Kategori extends Model
 
     public $timestamps = true;
 
-    public function Wisatas()
+    public function Wisata()
     {
         return $this->hasMany('App\Models\Wisata', 'kategori_id');
     }

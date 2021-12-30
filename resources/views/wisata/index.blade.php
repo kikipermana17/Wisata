@@ -144,9 +144,8 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Data Wisatawan
-                                <a href="{{ route('wisatawan.create') }}"
-                                    class="btn btn-primary float-right">Tambah</a>
+                                Data Kategori
+                                <a href="{{ route('wisata.create') }}" class="btn btn-primary float-right">Tambah</a>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -155,29 +154,38 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>No Telpon</th>
+                                                <th>Kategori Id</th>
+                                                <th>Nama Wisata</th>
+                                                <th>Alamat</th>
+                                                <th>Deskripsi</th>
+                                                <th>Fasilitas</th>
+                                                <th>Biro Id</th>
+                                                <th>Cover</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php $no=1; @endphp
-                                            @foreach ($wisatawan as $data)
+                                            @foreach ($wisata as $data)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $data->nama }}</td>
-                                                    <td>{{ $data->jk }}</td>
-                                                    <td>{{ $data->telpon }}</td>
+                                                    <td>{{ $data->kategori->nama }}</td>
+                                                    <td>{{ $data->nama_wisata }}</td>
+                                                    <td>{{ $data->alamat }}</td>
+                                                    <td>{{ $data->deskripsi }}</td>
+                                                    <td>{{ $data->fasilitas }}</td>
+                                                    <td>{{ $data->biro->nama }}</td>
+                                                    <td><img src="{{ $data->image() }}" alt=""
+                                                            style="width:150px; height:150px;" alt="cover"> </td>
                                                     <td>
-                                                        <form action="{{ route('wisatawan.destroy', $data->id) }}"
+                                                        <form action="{{ route('wisata.destroy', $data->id) }}"
                                                             method="post" enctype="multipart/form-data">
                                                             @method('delete')
                                                             @csrf
 
-                                                            <a href="{{ route('wisatawan.edit', $data->id) }}"
+                                                            <a href="{{ route('wisata.edit', $data->id) }}"
                                                                 class="btn btn-success float-right">Ubah</a>
-                                                            <a href="{{ route('wisatawan.show', $data->id) }}"
+                                                            <a href="{{ route('wisata.show', $data->id) }}"
                                                                 class="btn btn-warning float-right">Show</a>
                                                             <button type="submit" class="btn btn-danger"
                                                                 onclick="return confirm('Apakah Anda Yakin Ingin Menghapus ini?');">Delete</button>

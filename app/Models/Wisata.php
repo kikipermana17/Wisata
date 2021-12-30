@@ -15,13 +15,30 @@ class Wisata extends Model
 
     public $timestamps = true;
 
-    public function Kategoris()
+    public function Kategori()
     {
         return $this->belongsTo('App\Models\Kategori', 'kategori_id');
     }
 
-    public function Biros()
+    public function Biro()
     {
         return $this->belongsTo('App\Models\Biro', 'biro_id');
+    }
+
+    public function image()
+    {
+        if ($this->cover && file_exists(public_path('image/wisata/' . $this->cover))) {
+            return asset('image/wisata/' . $this->cover);
+        } else {
+            return asset('image/no_image.png');
+        }
+    }
+
+    public function deleteImage()
+    {
+        if ($this->cover && file_exists(public_path('image/wisata/' . $this->cover))) {
+            return unlink(public_path('image/wisata/' . $this->cover));
+        }
+
     }
 }

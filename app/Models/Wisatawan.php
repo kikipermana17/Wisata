@@ -15,7 +15,7 @@ class Wisatawan extends Model
 
     public $timestamps = true;
 
-    public function Biros()
+    public function Biro()
     {
         return $this->hasMany('App\Models\Biro', 'biro_id');
     }

@@ -144,9 +144,8 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Data Wisatawan
-                                <a href="{{ route('wisatawan.create') }}"
-                                    class="btn btn-primary float-right">Tambah</a>
+                                Data biro
+                                <a href="{{ route('biro.create') }}" class="btn btn-primary float-right">Tambah</a>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -155,29 +154,32 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Wisatawan Id</th>
                                                 <th>Nama</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>No Telpon</th>
+                                                <th>Alamat</th>
+                                                <th>Telpon</th>
+
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php $no=1; @endphp
-                                            @foreach ($wisatawan as $data)
+                                            @foreach ($biro as $data)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
+                                                    <td>{{ $data->wisatawan->nama }}</td>
                                                     <td>{{ $data->nama }}</td>
-                                                    <td>{{ $data->jk }}</td>
+                                                    <td>{{ $data->alamat }}</td>
                                                     <td>{{ $data->telpon }}</td>
                                                     <td>
-                                                        <form action="{{ route('wisatawan.destroy', $data->id) }}"
+                                                        <form action="{{ route('biro.destroy', $data->id) }}"
                                                             method="post" enctype="multipart/form-data">
                                                             @method('delete')
                                                             @csrf
 
-                                                            <a href="{{ route('wisatawan.edit', $data->id) }}"
+                                                            <a href="{{ route('biro.edit', $data->id) }}"
                                                                 class="btn btn-success float-right">Ubah</a>
-                                                            <a href="{{ route('wisatawan.show', $data->id) }}"
+                                                            <a href="{{ route('biro.show', $data->id) }}"
                                                                 class="btn btn-warning float-right">Show</a>
                                                             <button type="submit" class="btn btn-danger"
                                                                 onclick="return confirm('Apakah Anda Yakin Ingin Menghapus ini?');">Delete</button>
