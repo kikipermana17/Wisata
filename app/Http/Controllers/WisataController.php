@@ -95,16 +95,16 @@ class WisataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //validasi data
-        $validated = $request->validate([
-            'kategori_id' => 'required',
-            'nama_wisata' => 'required',
-            'alamat' => 'required',
-            'deskripsi' => 'required',
-            'fasilitas' => 'required',
-            'biro_id' => 'required',
-            'cover' => 'required',
-        ]);
+        // //validasi data
+        // $validated = $request->validate([
+        //     'kategori_id' => 'required',
+        //     'nama_wisata' => 'required',
+        //     'alamat' => 'required',
+        //     'deskripsi' => 'required',
+        //     'fasilitas' => 'required',
+        //     'biro_id' => 'required',
+        //     'cover' => 'required',
+        // ]);
 
         $wisata = Wisata::findOrFail($id);
         $wisata->kategori_id = $request->kategori_id;
@@ -113,6 +113,7 @@ class WisataController extends Controller
         $wisata->deskripsi = $request->deskripsi;
         $wisata->fasilitas = $request->fasilitas;
         $wisata->biro_id = $request->biro_id;
+        $wisata->cover = $request->cover;
         // upload image / foto
         if ($request->hasFile('cover')) {
             $wisata->deleteImage();

@@ -58,7 +58,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h1>Edit Data Wisata</h1>
+                                    <h1>Edit Data Kategori</h1>
                                 </div>
                                 <br>
                                 <form Action="{{ route('wisata.update', $wisata->id) }}" method="post">
@@ -75,7 +75,7 @@
                                         </select>
                                         <label>Nama Wisata </label>
                                         <input type="text" class="form-control" name="nama_wisata"
-                                            value="{{ $wisata->nama }}">
+                                            value="{{ $wisata->nama_wisata }}">
                                         <label>Alamat</label>
                                         <input type="text" class="form-control" name="alamat"
                                             value="{{ $wisata->alamat }}">
@@ -85,12 +85,17 @@
                                         <label>Fasilitas</label>
                                         <input type="text" class="form-control" name="fasilitas"
                                             value="{{ $wisata->fasilitas }}">
-                                        <label>Deskripsi</label>
-                                        <input type="text" class="form-control" name="deskripsi"
-                                            value="{{ $wisata->deskripsi }}">
-                                        <label>Deskripsi</label>
-                                        <input type="text" class="form-control" name="deskripsi"
-                                            value="{{ $wisata->deskripsi }}">
+                                        <label>Biro Id</label>
+                                        <select name="biro_id" class="form-control">
+                                            @foreach ($biro as $data)
+                                                <option value="{{ $data->id }}"
+                                                    {{ $data->id == $wisata->biro_id ? 'selected="selected"' : '' }}>
+                                                    {{ $data->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        <label>Cover</label>
+                                        <input type="text" class="form-control" name="cover"
+                                            value="{{ $wisata->cover }}">
                                     </div>
                                     <div class="panel-body">
                                         <button type="reset" class="btn btn-warning">Reset</button>

@@ -60,7 +60,8 @@
                                 <div class="panel-heading">
                                     Tambah Data Biro
                                 </div>
-                                <form Action="{{ route('biro.store') }}" method="post" enctype="multipart/form-data">
+                                <form Action="{{ route('wisata.store') }}" method="post"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="panel-body">
                                         <label>Kategori Id</label>
@@ -77,7 +78,7 @@
                                         <input type="text" class="form-control" name="deskripsi">
                                         <label>Faslitas</label>
                                         <input type="text" class="form-control" name="fasilitas">
-                                        <label>Biro Id</label>
+                                        <label>wisata Id</label>
                                         <select name="biro_id" class="form-control">
                                             @foreach ($biro as $data)
                                                 <option value="{{ $data->id }}">{{ $data->nama }}</option>
