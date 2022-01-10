@@ -1,6 +1,7 @@
 <?php
 
 use App\http\Controllers\BiroController;
+use App\http\Controllers\FrontendController;
 use App\http\Controllers\KategoriController;
 use App\http\Controllers\WisataController;
 use App\http\Controllers\WisatawanController;
@@ -17,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome',KategoriController::class);
+// });
 
 Auth::routes(
     [
@@ -71,6 +72,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('layouts', function () {
     return view('layouts.admin');
 });
+Route::get('layouts', function () {
+    return view('layouts.frontend');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('kategori', function () {
@@ -94,6 +98,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('wisata', WisataController::class);
 
 });
+Route::resource('/', FrontendController::class);
 
 // Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 //     Route::get('wisatawan', function () {
