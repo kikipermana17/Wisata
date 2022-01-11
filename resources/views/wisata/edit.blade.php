@@ -94,7 +94,7 @@
                                             @endforeach
                                         </select>
                                         <label>Cover</label>
-                                        <input type="text" class="form-control" name="cover"
+                                        <input type="file" class="form-control" name="cover"
                                             value="{{ $wisata->cover }}">
                                     </div>
                                     <div class="panel-body">
