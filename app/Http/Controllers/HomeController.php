@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Biro;
+use App\Models\Kategori;
+use App\Models\Wisata;
+use App\Models\Wisatawan;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $kategori = Kategori::all();
+        $wisata = Wisata::all();
+        $biro = Biro::all();
+        $wisatawan = Wisatawan::all();
+        $kategory = DB::table('kategoris')->count();
+        $wisatas = DB::table('wisatas')->count();
+        $biros = DB::table('biros')->count();
+        $wisatawans = DB::table('wisatawans')->count();
+        return view('home', compact('kategori', 'kategory', 'wisata', 'wisatas', 'biro', 'biros', 'wisatawan', 'wisatawans'));
+
     }
 }

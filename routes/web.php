@@ -77,6 +77,13 @@ Route::get('layouts', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('layouts', function () {
+        return view('layouts.admin');
+    });
+    Route::get('layouts', function () {
+        return view('layouts.frontend');
+    });
+
     Route::get('kategori', function () {
         return view('kategori.index');
     })->middleware(['role:admin']);
@@ -99,6 +106,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 });
 Route::resource('/', FrontendController::class);
+// Route::resource('/', DashboardController::class);
 
 // Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 //     Route::get('wisatawan', function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use DB;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -15,7 +16,14 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        return view('kategori.index', compact('kategori'));
+        $kategory = DB::table('kategoris')->count();
+
+        //Ubah json
+        return response()->json([
+            'success' => true,
+            'message' => 'List Data Kategori',
+            'data' => $kategori,
+        ], 200);
     }
 
     /**
