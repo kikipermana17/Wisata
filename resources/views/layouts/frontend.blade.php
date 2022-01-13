@@ -206,15 +206,14 @@
                         @foreach ($wisata as $data)
                             <li class="portfolio-item">
                                 <img src="{{ $data->image() }}" style="width:370px; height:370px;"
-                                    class="img-responsive"
-                                    alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat">
+                                    class="img-responsive" alt="{{ $data->deskripsi }}">
                                 <figcaption class="mask">
                                     <h3>{{ $data->nama_wisata }}</h3>
                                     <p>{{ $data->deskripsi }}</p>
                                 </figcaption>
                                 <ul class="external">
-                                    <li><a class="fancybox" title="Araund The world" data-fancybox-group="works"
-                                            href="{{ asset('/frontend/img/portfolio/wisata3.jpg') }}"><i
+                                    <li><a class="fancybox" title="{{ $data->nama_wisata }}"
+                                            data-fancybox-group="works" href="{{ $data->image() }}"><i
                                                 class="fa fa-search"></i></a></li>
                                 </ul>
                             </li>

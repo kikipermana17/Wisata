@@ -17,13 +17,13 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::all();
         $kategory = DB::table('kategoris')->count();
-
+        return view('kategori.index', compact('kategori', 'kategory'));
         //Ubah json
-        return response()->json([
-            'success' => true,
-            'message' => 'List Data Kategori',
-            'data' => $kategori,
-        ], 200);
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'List Data Kategori',
+        //     'data' => $kategori,
+        // ], 200);
     }
 
     /**
