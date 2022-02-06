@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use DB;
 use Illuminate\Http\Request;
+use Str;
 
 class KategoriController extends Controller
 {
@@ -45,14 +46,19 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         //validasi data
-        $validated = $request->validate([
-            'nama' => 'required',
-        ]);
+        // $validation = Validator::make($Request->all(), $rules, $message);
+        // if ($validation->fails()) {
+        //     Alert::error('Sorry your data is invalid, please try again!', 'Oops!');
+        //     return back()->withErrors($validation)->withInput();
+        // }
 
         $kategori = new Kategori;
         $kategori->nama = $request->nama;
+        $kategori->slug = Str::slug($request->nama, '-');
         $kategori->save();
+        // Alert::success('Data successfully saved', 'Good Job')->autoclose(1500);
         return redirect()->route('kategori.index');
+
     }
 
     /**
@@ -89,13 +95,17 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         //validasi data
-        $validated = $request->validate([
-            'nama' => 'required',
-        ]);
+        // $validation = Validator::make($Request->all(), $rules, $message);
+        // if ($validation->fails()) {
+        //     Alert::error('Sorry your data is invalid, please try again!', 'Oops!');
+        //     return back()->withErrors($validation)->withInput();
+        // }
 
-        $kategori = Kategori::findOrFail($id);
+        $kategori = new Kategori;
         $kategori->nama = $request->nama;
+        $kategori->slug = Str::slug($request->nama, '-');
         $kategori->save();
+        // Alert::success('Data successfully saved', 'Good Job')->autoclose(1500);
         return redirect()->route('kategori.index');
 
     }

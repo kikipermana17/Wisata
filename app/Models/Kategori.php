@@ -11,12 +11,17 @@ class Kategori extends Model
 
     protected $visible = ['nama'];
 
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama', 'slug'];
 
     public $timestamps = true;
 
     public function Wisata()
     {
         return $this->hasMany('App\Models\Wisata', 'kategori_id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

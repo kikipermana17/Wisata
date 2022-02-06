@@ -20,6 +20,7 @@ class CreateWisatasTable extends Migration
             $table->string('alamat');
             $table->string('deskripsi');
             $table->string('fasilitas');
+            $table->string('slug');
             $table->bigInteger('biro_id')->unsigned();
             $table->string('cover')->nullable();
             // fk kategori

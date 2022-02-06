@@ -75,6 +75,9 @@ Route::get('layouts', function () {
 Route::get('layouts', function () {
     return view('layouts.frontend');
 });
+Route::get('layouts', function () {
+    return view('layouts.work');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('layouts', function () {
@@ -105,7 +108,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('wisata', WisataController::class);
 
 });
+// Route::resource('/', FrontendController::class);
 Route::resource('/', FrontendController::class);
+Route::get('wisata/{wisata}', [FrontendController::class, 'singleblog']);
+
 // Route::resource('/', DashboardController::class);
 
 // Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {

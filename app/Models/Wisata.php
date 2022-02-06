@@ -11,7 +11,7 @@ class Wisata extends Model
 
     protected $visible = ['kategori_id', 'nama_wisata', 'alamat', 'deskripsi', 'fasilitas', 'biro_id', 'cover'];
 
-    protected $fillable = ['kategori_id', 'nama_wisata', 'alamat', 'deskripsi', 'fasilitas', 'biro_id', 'cover'];
+    protected $fillable = ['kategori_id', 'slug', 'nama_wisata', 'alamat', 'deskripsi', 'fasilitas', 'slug', 'biro_id', 'cover'];
 
     public $timestamps = true;
 
@@ -40,5 +40,10 @@ class Wisata extends Model
             return unlink(public_path('image/wisata/' . $this->cover));
         }
 
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Biro;
 use App\Models\Kategori;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
+use Str;
 
 class WisataController extends Controller
 {
@@ -40,6 +41,12 @@ class WisataController extends Controller
      */
     public function store(Request $request)
     {
+        // $validation = Validator::make($Request->all(), $rules, $message);
+        // if ($validation->fails()) {
+        //     Alert::error('Sorry your data is invalid, please try again!', 'Oops!');
+        //     return back()->withErrors($validation)->withInput();
+        // }
+
         $wisata = new Wisata;
         $wisata->kategori_id = $request->kategori_id;
         $wisata->nama_wisata = $request->nama_wisata;
@@ -48,15 +55,19 @@ class WisataController extends Controller
         $wisata->fasilitas = $request->fasilitas;
         $wisata->biro_id = $request->biro_id;
         $wisata->cover = $request->cover;
+        $wisata->slug = Str::slug($request->nama_wisata, '-');
         // upload image / foto
         if ($request->hasFile('cover')) {
+            $wisata->deleteImage();
             $image = $request->file('cover');
             $name = rand(1000, 9999) . $image->getClientOriginalName();
             $image->move('image/wisata/', $name);
             $wisata->cover = $name;
         }
         $wisata->save();
+        // Alert::success('Data successfully saved', 'Good Job')->autoclose(1500);
         return redirect()->route('wisata.index');
+
     }
 
     /**
@@ -96,17 +107,13 @@ class WisataController extends Controller
     public function update(Request $request, $id)
     {
         // //validasi data
-        // $validated = $request->validate([
-        //     'kategori_id' => 'required',
-        //     'nama_wisata' => 'required',
-        //     'alamat' => 'required',
-        //     'deskripsi' => 'required',
-        //     'fasilitas' => 'required',
-        //     'biro_id' => 'required',
-        //     'cover' => 'required',
-        // ]);
+        // $validation = Validator::make($Request->all(), $rules, $message);
+        // if ($validation->fails()) {
+        //     Alert::error('Sorry your data is invalid, please try again!', 'Oops!');
+        //     return back()->withErrors($validation)->withInput();
+        // }
 
-        $wisata = Wisata::findOrFail($id);
+        $wisata = new Wisata;
         $wisata->kategori_id = $request->kategori_id;
         $wisata->nama_wisata = $request->nama_wisata;
         $wisata->alamat = $request->alamat;
@@ -114,6 +121,7 @@ class WisataController extends Controller
         $wisata->fasilitas = $request->fasilitas;
         $wisata->biro_id = $request->biro_id;
         $wisata->cover = $request->cover;
+        $wisata->slug = Str::slug($request->nama_wisata, '-');
         // upload image / foto
         if ($request->hasFile('cover')) {
             $wisata->deleteImage();
@@ -123,8 +131,9 @@ class WisataController extends Controller
             $wisata->cover = $name;
         }
         $wisata->save();
-
+        // Alert::success('Data successfully saved', 'Good Job')->autoclose(1500);
         return redirect()->route('wisata.index');
+
     }
 
     /**
